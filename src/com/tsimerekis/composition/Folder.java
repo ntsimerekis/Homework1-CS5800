@@ -30,8 +30,8 @@ public class Folder extends File {
 		return new ArrayList<File>(contents);
 	}
 	
-	public boolean removeFile(final String fileName) {
-		return contents.removeIf(f -> f.getName().equals(fileName));
+	public boolean removeFile(final Folder folder) {
+		return contents.remove(folder);
 	}
 	
 	public static int compare(File f1, File f2) {

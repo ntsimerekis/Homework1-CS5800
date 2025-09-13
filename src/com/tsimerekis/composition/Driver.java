@@ -3,20 +3,43 @@ package com.tsimerekis.composition;
 public class Driver {
 	
 	public static void main(String[] args) {
-		final Folder root = new Folder("root");
+		System.out.println("--- Creating structure ---");
+		final Folder demo1 = new Folder("demo1");
+		final Folder sourceFiles = new Folder("Source Files");
+		sourceFiles.addFile(new Folder(".phalcon"));
 		
-		root.addFile(new File("nicholas.txt"));
-		root.addFile(new File("pomona.txt"));
-		root.addFile(new File("longbeach.txt"));
+		final Folder app = new Folder("app");
+		app.addFile(new Folder("config"));
+		app.addFile(new Folder("controllers"));
+		app.addFile(new Folder("library"));
+		app.addFile(new Folder("migrations"));
+		app.addFile(new Folder("models"));
+		app.addFile(new Folder("views"));
+		sourceFiles.addFile(app);
 		
-		final Folder myFolder = new Folder("java");
-		myFolder.addFile(new File("File.java"));
-		myFolder.addFile(new File("Folder.java"));
-		myFolder.addFile(new File("Driver.java"));
+		sourceFiles.addFile(new Folder("cache"));
 		
-		root.addFile(myFolder);
+		final Folder publicFolder = new Folder("public");
+		publicFolder.addFile(new File(".htaccess"));
+		publicFolder.addFile(new File(".htrouter.php"));
+		publicFolder.addFile(new File("index.html"));
+		sourceFiles.addFile(publicFolder);
+		
+		demo1.addFile(sourceFiles);
+		
+		demo1.addFile(new Folder("Include Path"));
+		demo1.addFile(new Folder("Remote Files"));
+		
+		System.out.println(demo1);
+		
+		System.out.println("--- Deleting app ---");
+		sourceFiles.removeFile(app);
+		System.out.println(demo1);
+		
+		System.out.println("--- Deleting public ---");
+		sourceFiles.removeFile(publicFolder);
+		System.out.println(demo1);
 
-		System.out.println(root);
 	}
 
 }
